@@ -1,0 +1,17 @@
+div.textbox {
+  border: 1px solid #111;
+  width: 180px;
+  height: 40px;
+}
+
+button {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
+
+input {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+}
