@@ -1,9 +1,9 @@
 "use strict";
 
-var state = "";
-var totyuu;
-var number = "0";
-var result;
+var state = ""; //現在の状態
+var totyuu; //演算子を押した後に入力した値
+var number = "0"; //初期の値
+var result; //計算結果の値
 
 function numberClick(obj) {
   switch (state) {
@@ -23,6 +23,22 @@ function numberClick(obj) {
       number = "";
       state = "divided";
       break;
+    case "plus_result_waiting":
+      number = "";
+      state = "plus";
+      break;
+    case "minus_result_waiting":
+      number = "";
+      state = "minus";
+      break;
+    case "multiplied_result_waiting":
+      number = "";
+      state = "multiplied";
+      break;
+    case "divided_result_waiting":
+      number = "";
+      state = "divided";
+      break;   
   }
   number += obj.value
   display(number);
@@ -81,7 +97,6 @@ function dotClick() {
     number += ".";
     display(number);
   }
-
 }
 
 function equalClick() {
@@ -128,9 +143,9 @@ function equalClick() {
 function clearClick() {
   state = "";
   totyuu = undefined;
-  display(number = 0);
+  display(number = "0");
 }
 
 function display(msg) {
-  displayArea.innerHTML = msg;
+  displayArea.innerText = msg;
 }
