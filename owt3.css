@@ -1,7 +1,9 @@
 div.textbox {
   border: 1px solid #111;
-  width: 180px;
+  width: 170px;
   height: 40px;
+  padding: 5px;
+  text-align: right;
 }
 
 button {
