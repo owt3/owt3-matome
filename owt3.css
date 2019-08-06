@@ -1,9 +1,12 @@
 div.textbox {
-  border: 1px solid #111;
-  width: 165px;
-  height: 100%;
+  border: 1px solid #111; /*外枠線*/
+  max-width: 165px;
   padding: 5px;
+  font-size: 20px;
   text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis; /*結果が枠外に出る場合、...で省略表示させる*/
+  white-space: nowrap;
 }
 
 input {
