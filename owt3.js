@@ -6,7 +6,10 @@ var number = "0"; //初期の値
 var result; //計算結果の値
 
 function numberClick(obj) {
-  switch (state) {
+  if (number === "0") { //先頭に0が付かない為の実装
+    number = "";
+  }
+  switch (state) { //
     case "plus_waiting":
       number = "";
       state = "plus";
@@ -25,59 +28,125 @@ function numberClick(obj) {
       break;
     case "plus_result_waiting":
       number = "";
+      totyuu = result;
       state = "plus";
       break;
     case "minus_result_waiting":
       number = "";
+      totyuu = result;
       state = "minus";
       break;
     case "multiplied_result_waiting":
       number = "";
+      totyuu = result;
       state = "multiplied";
       break;
-    case "divided_result_waiting":
+    case "divided_waiting":
       number = "";
+      totyuu = result;
       state = "divided";
-      break;   
+      break;
   }
-  number += obj.value
-  display(number);
+  if (number.length < 8) {
+    number += obj.value;
+    display(number);
+  }
 }
 
 function plusClick() {
-  totyuu = number;
   switch (state) {
     case "plus_result_waiting": 
     case "minus_result_waiting": 
     case "multiplied_result_waiting": 
     case "divided_result_waiting": 
       totyuu = result;
+      state = "";
+      break;
+
+    case "plus": //a+b=と同じ挙動を+で代用
+      result = Number(totyuu) + Number(number);
+      display(result);
+      state = "plus_result_waiting";
+      break;
+
+    case "plus_waiting":
+      totyuu = result;
+      result = Number(totyuu) + Number(number);
+      display(result);
+      state = "plus_waiting";
+      break;
+
+    default:
+      totyuu = number;
+      state = "plus_waiting";
+      break;
   }
-  state = "plus_waiting";
 }
 
 function minusClick() {
-  totyuu = number;
   switch (state) {
-    case "plus_result_waiting": 
-    case "minus_result_waiting": 
-    case "multiplied_result_waiting": 
-    case "divided_result_waiting": 
+    case "plus_result_waiting":
+    case "minus_result_waiting":
+    case "multiplied_result_waiting":
+    case "divided_result_waiting":
       totyuu = result;
+      state = "minus_result_waiting";
+      break;
+
+      case "plus": //a+b=と同じ挙動を+で代用
+      result = Number(totyuu) + Number(number);
+      display(result);
+      state = "plus_result_waiting";
+      break;
+      
+      case "minus": //a-b=と同じ挙動を-で代用
+      result = Number(totyuu) - Number(number);
+      display(result);
+      state = "minus_result_waiting";
+      break;
+
+    case "minus_waiting":
+      totyuu = result;
+      result = Number(totyuu) - Number(number);
+      display(result);
+      state = "minus_waiting";
+      break;
+
+    default:
+      totyuu = number;
+      state = "minus_waiting";
+      break;
   }
-  state = "minus_waiting";
 }
 
 function multipliedClick() {
-  totyuu = number;
   switch (state) {
-    case "plus_result_waiting": 
-    case "minus_result_waiting": 
-    case "multiplied_result_waiting": 
-    case "divided_result_waiting": 
+    case "plus_result_waiting":
+    case "minus_result_waiting":
+    case "multiplied_result_waiting":
+    case "divided_result_waiting":
       totyuu = result;
+      break;
+
+    case "multiplied": //a*b=と同じ挙動を×で代用
+      result = Number(totyuu) * Number(number);
+      display(result);
+      state = "multiplied_result_waiting";
+      break;
+
+    case "multiplied_waiting":
+      totyuu = result;
+      result = Number(totyuu) + Number(number);
+      display(result);
+      state = "multiplied_waiting";
+      break;
+
+    default:
+      totyuu = number;
+      state = "multiplied_waiting";
+      break;
   }
-  state = "multiplied_waiting";
+
 }
 
 function dividedClick() {
@@ -88,6 +157,7 @@ function dividedClick() {
     case "multiplied_result_waiting": 
     case "divided_result_waiting": 
       totyuu = result;
+      break;
   }
   state = "divided_waiting";
 }
@@ -147,5 +217,5 @@ function clearClick() {
 }
 
 function display(msg) {
-  displayArea.innerText = msg;
+  displayArea.innerHTML = msg;
 }
