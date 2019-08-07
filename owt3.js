@@ -60,6 +60,7 @@ function plusClick() { //+を押した場合の処理
     case "multiplied_result_waiting": 
     case "divided_result_waiting": 
       totyuu = result;
+      state = "plus_result_waiting";
       break;
 
     case "plus": //a+b=と同じ挙動を+で代用
